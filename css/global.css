@@ -13,11 +13,10 @@
     margin-inline-start: auto;
     margin-inline-end: auto;
     margin-block-start: 2em;
-    max-inline-size: 22rem;
-    width: 17em;
+    max-inline-size: 17rem;
     overflow: hidden;
 }
-.calculator__output {
+.calculator__display {
     background: hsl(202, 11%, 29%);
     color: hsl(255, 100%, 100%);
     font-size: 3rem;
