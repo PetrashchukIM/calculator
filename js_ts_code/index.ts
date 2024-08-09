@@ -6,6 +6,7 @@ enum Action {
     subtract = "subtract",
     multiply = "multiply",
     divide = "divide",
+    is_click_operator = "is_click_operator",
 }
 
 const calculator = document.getElementsByClassName("calculator")[0] as HTMLElement;
@@ -18,7 +19,8 @@ keys.addEventListener("click", (event: MouseEvent) => {
         const action = target.dataset.action;
         const keyContent = target.innerText.split(/\s+/).join("");
         const displayedNum = display.innerText.split(/\s+/).join("");
-        
+        const previousKeyType = calculator.dataset.previousKeyType;
+
         if (!action) {
             if (displayedNum === "0") {
                 display.textContent = keyContent;
@@ -26,19 +28,43 @@ keys.addEventListener("click", (event: MouseEvent) => {
                 display.textContent = displayedNum + keyContent;
             }
         }
-       
+
+        if (!previousKeyType) {
+            display.textContent = "0";
+        }
+
         if (action === Action.decimal) {
             if (displayedNum.indexOf(".") === -1) {
                 display.textContent = displayedNum + ".";
             }
         }
 
-        if (action === Action.add || action === Action.subtract || action === Action.multiply || action === Action.multiply) {
-            target.classList.add("is-depressed");
+        if (action === Action.add || action === Action.subtract || action === Action.multiply || action === Action.divide) {
+            calculator.dataset.previousKeyType = action;
+            target.dataset.previousKeyType = Action.is_click_operator;
         }
 
-        console.log(action);
-        console.log(keyContent);
-        console.log(displayedNum);
+        if (action === Action.calculate) {
+            const firstValue:number = Number(calculator.dataset.firstValue);
+            const operator:string = calculator.dataset.operator;
+            const secondValue:number = Number(displayedNum);
+
+            display.textContent = calculate(firstValue, operator, secondValue);
+        }
     }
 });
+
+const calculate = (n1: number, operator: string, n2: number): string => {
+    let result: number = 0;
+
+    if (operator === Action.add) {
+        result = n1 + n2;
+    } else if (operator === Action.subtract) {
+        result = n1 - n2;
+    } else if (operator === Action.multiply) {
+        result = n1 * n2;
+    } else if (operator === Action.divide) {
+        result = n1 / n2;
+    }
+    return result.toString();
+};

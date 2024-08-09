@@ -29,19 +29,29 @@
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     grid-gap: 2px;
-    background: hsl(207, 19%, 61%);
+    background: hsl(207, 10%, 70%);
 }
 
-.calculator__key {
+/* .calculator__key:active,
+.calculator__key:focus {
+    box-shadow: 0 0 8px 0 rgba(0, 0, 0, 0.3) inset;
+    outline: none;
+    transform: translateY(2px);
+} */
+
+
+ /* .calculator__key {
+    background: hsl(207, 19%, 61%);
     border: none;
     font-size: 1.2rem;
+    color: white;
     padding: 0.75rem;
     transition: transform 0.1s ease-in-out, background-color 0.1s ease-in-out;
     cursor: pointer;
 }
 
 .calculator__key:active {
-    animation: pressEffect 0.1s forwards;
+    animation: pressEffect 0.1s forwards; 
 }
 
 @keyframes pressEffect {
@@ -57,12 +67,10 @@
         transform: scale(1);
         background-color: hsl(207, 19%, 61%);
     }
-}
+} */
 
-.calculator__key--operator {
-    background: hsl(208, 25%, 86%);
-}
-.calculator__key--operator:active {
+.calculator_operator:active,
+.calculator__key:active {
     background: hsl(208, 24%, 80%);
 }
 .calculator__key--enter {
@@ -71,3 +79,7 @@
     background: hsl(357, 100%, 72%);
 }
 
+
+/* .is-depressed{
+    color: hsl(255, 100%, 100%);
+} */
