@@ -15,6 +15,11 @@ keys.addEventListener("click", function (event) {
                 display.textContent = displayedNum + keyContent;
             }
         }
+        if (action === 'decimal') {
+            if (displayedNum.indexOf('.') === -1) {
+                display.textContent = displayedNum + '.';
+            }
+        }
         console.log(action);
         console.log(keyContent);
         console.log(displayedNum);
