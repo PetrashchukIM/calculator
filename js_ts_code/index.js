@@ -27,27 +27,35 @@ keys.addEventListener("click", function (event) {
                 display.textContent = displayedNum + keyContent;
             }
         }
-        if (previousKeyType === Action.is_click_operator) {
-            display.textContent = "0";
-            delete calculator.dataset.previousKeyType;
-        }
         if (action === Action.decimal) {
             if (displayedNum.indexOf(".") === -1) {
                 display.textContent = displayedNum + ".";
             }
         }
         if (action === Action.add || action === Action.subtract || action === Action.multiply || action === Action.divide) {
-            calculator.dataset.previousKeyType = Action.is_click_operator;
+            calculator.dataset.previousKeyType = action;
+            calculator.dataset.firstValue = displayedNum;
+            display.textContent = "0";
         }
         if (action === Action.calculate) {
             var firstValue = Number(calculator.dataset.firstValue);
-            var operator = calculator.dataset.operator;
+            var operator = calculator.dataset.previousKeyType;
             var secondValue = Number(displayedNum);
             display.textContent = calculate(firstValue, operator, secondValue);
+            clearAll();
+        }
+        if (action === Action.clear) {
+            display.textContent = "0";
+            clearAll();
         }
     }
 });
-var calculate = function (n1, operator, n2) {
+function clearAll() {
+    delete calculator.dataset.previousKeyType;
+    delete calculator.dataset.previousKeyType;
+    delete calculator.dataset.firstValue;
+}
+function calculate(n1, operator, n2) {
     var result = 0;
     if (operator === Action.add) {
         result = n1 + n2;
@@ -62,4 +70,4 @@ var calculate = function (n1, operator, n2) {
         result = n1 / n2;
     }
     return result.toString();
-};
+}
