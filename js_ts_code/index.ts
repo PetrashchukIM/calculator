@@ -57,23 +57,3 @@ keys.addEventListener("click", (event: MouseEvent) => {
     }
 });
 
-function clearAll(): void {
-    delete calculator.dataset.previousKeyType;
-    delete calculator.dataset.previousKeyType;
-    delete calculator.dataset.firstValue;
-}
-
-function calculate(n1: number, operator: string, n2: number): string {
-    let result: number = 0;
-
-    if (operator === Action.add) {
-        result = n1 + n2;
-    } else if (operator === Action.subtract) {
-        result = n1 - n2;
-    } else if (operator === Action.multiply) {
-        result = n1 * n2;
-    } else if (operator === Action.divide) {
-        result = n1 / n2;
-    }
-    return result.toString();
-}
