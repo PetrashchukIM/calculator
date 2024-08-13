@@ -35,7 +35,25 @@ keys.addEventListener("click", (event: MouseEvent) => {
             }
         }
 
-       
+        if (action === Action.add || action === Action.subtract || action === Action.multiply || action === Action.divide) {
+            calculator.dataset.previousKeyType = action;
+            calculator.dataset.firstValue = displayedNum;
+            display.textContent = "0";
+        }
+
+        if (action === Action.calculate) {
+            const firstValue: number = Number(calculator.dataset.firstValue);
+            const operator: string = calculator.dataset.previousKeyType;
+            const secondValue: number = Number(displayedNum);
+
+            display.textContent = calculate(firstValue, operator, secondValue);
+
+            clearAll();
+        }
+        if (action === Action.clear) {
+            display.textContent = "0";
+            clearAll();
+        }
     }
 });
 
